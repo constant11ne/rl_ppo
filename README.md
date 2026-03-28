@@ -149,7 +149,7 @@ L^{\text{CLIP}}(\theta) =
 \mathbb{E}_t \left[
 \min \left(
 r_t(\theta) A_t,\,
-\operatorname{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t
+clip(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t
 \right)
 \right]
 $$
@@ -164,7 +164,7 @@ $$
 
 $$
 V_t^{\text{clip}} = V_{\text{old}}(s_t) +
-\operatorname{clip}(V_\theta(s_t) - V_{\text{old}}(s_t), -\epsilon, \epsilon)
+clip(V_\theta(s_t) - V_{\text{old}}(s_t), -\epsilon, \epsilon)
 $$
 
 $$
@@ -300,7 +300,7 @@ Recurrent model использует:
 Для последовательности наблюдений:
 
 $$
-h_t, c_t = \operatorname{LSTMCell}(x_t, (h_{t-1}, c_{t-1}))
+h_t, c_t = LSTMCell(x_t, (h_{t-1}, c_{t-1}))
 $$
 
 $$
