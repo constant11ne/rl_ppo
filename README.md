@@ -192,9 +192,7 @@ $$
 - $L^{VF}$ — value loss,
 - $c_v$ — коэффициент при value loss.
 
-Дополнительно используется gradient clipping:
-
-$$|\nabla_\theta L| \leq \text{max\_grad\_norm}$$
+Дополнительно используется gradient clipping.
 
 ---
 
