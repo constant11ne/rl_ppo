@@ -82,16 +82,16 @@ $$
 
 Стандартное отклонение получается через `softplus`, чтобы гарантировать положительность:
 
-\[
+$$
 \sigma_\theta(s) = \operatorname{softplus}(x) + \varepsilon
-\]
+$$
 
 #### Value head
 Value network аппроксимирует функцию ценности состояния:
 
-\[
+$$
 V_\phi(s)
-\]
+$$
 
 ---
 
@@ -101,32 +101,32 @@ V_\phi(s)
 
 Сначала считаются TD-residuals:
 
-\[
+$$
 \delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)
-\]
+$$
 
 Затем advantage считается рекурсивно:
 
-\[
+$$
 A_t = \delta_t + \gamma \lambda (1 - d_t) A_{t+1}
-\]
+$$
 
 где:
-- \(\gamma\) — discount factor,
-- \(\lambda\) — параметр GAE,
-- \(d_t\) — индикатор завершения эпизода.
+- $\gamma$ — discount factor,
+- $\lambda$ — параметр GAE,
+- $d_t$ — индикатор завершения эпизода.
 
 Target для value function:
 
-\[
+$$
 \hat{V}_t = A_t + V(s_t)
-\]
+$$
 
 После этого advantages нормализуются:
 
-\[
+$$
 \tilde{A}_t = \frac{A_t - \mu(A)}{\sigma(A) + \varepsilon}
-\]
+$$
 
 Это улучшает стабильность оптимизации.
 
@@ -138,13 +138,13 @@ Target для value function:
 
 PPO использует отношение новых и старых вероятностей действия:
 
-\[
+$$
 r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}
-\]
+$$
 
 Clipped surrogate objective:
 
-\[
+$$
 L^{\text{CLIP}}(\theta) =
 \mathbb{E}_t \left[
 \min \left(
@@ -152,7 +152,7 @@ r_t(\theta) A_t,\,
 \operatorname{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t
 \right)
 \right]
-\]
+$$
 
 В коде минимизируется отрицание этого функционала.
 
@@ -162,12 +162,12 @@ r_t(\theta) A_t,\,
 
 Используется clipped value loss:
 
-\[
+$$
 V_t^{\text{clip}} = V_{\text{old}}(s_t) +
 \operatorname{clip}(V_\theta(s_t) - V_{\text{old}}(s_t), -\epsilon, \epsilon)
-\]
+$$
 
-\[
+$$
 L^{VF} =
 \mathbb{E}_t \left[
 \max \left(
@@ -175,7 +175,7 @@ L^{VF} =
 (V_t^{\text{clip}} - \hat{V}_t)^2
 \right)
 \right]
-\]
+$$
 
 ---
 
@@ -183,20 +183,20 @@ L^{VF} =
 
 Итоговая функция:
 
-\[
+$$
 L = L^{\pi} + c_v L^{VF}
-\]
+$$
 
 где:
-- \(L^{\pi}\) — policy loss,
-- \(L^{VF}\) — value loss,
-- \(c_v\) — коэффициент при value loss.
+- $L^{\pi}$ — policy loss,
+- $L^{VF}$ — value loss,
+- $c_v$ — коэффициент при value loss.
 
 Дополнительно используется gradient clipping:
 
-\[
+$$
 \|\nabla_\theta L\| \leq \text{max\_grad\_norm}
-\]
+$$
 
 ---
 
@@ -299,13 +299,13 @@ Recurrent model использует:
 
 Для последовательности наблюдений:
 
-\[
+$$
 h_t, c_t = \operatorname{LSTMCell}(x_t, (h_{t-1}, c_{t-1}))
-\]
+$$
 
-\[
+$$
 \pi_\theta(a_t \mid s_t, h_t), \quad V_\phi(s_t, h_t)
-\]
+$$
 
 При reset окружения hidden state маскируется, чтобы не протекала информация между разными эпизодами.
 
