@@ -83,7 +83,7 @@ $$
 Стандартное отклонение получается через `softplus`, чтобы гарантировать положительность:
 
 $$
-\sigma_\theta(s) = \operatorname{softplus}(x) + \varepsilon
+\sigma_\theta(s) = softplus(x) + \varepsilon
 $$
 
 #### Value head
