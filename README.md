@@ -194,9 +194,7 @@ $$
 
 Дополнительно используется gradient clipping:
 
-$$
-\|\nabla_\theta L\| \leq \text{max\_grad\_norm}
-$$
+$$|\nabla_\theta L| \leq \text{max\_grad\_norm}$$
 
 ---
 
